@@ -15,23 +15,23 @@ export default function EditAvatarPopup ({ isOpen, onClose, onUpdateAvatar, isLo
 
   return (
     <PopupWithForm
-        isOpen={isOpen}
-        onClose={onClose}
-        name='avatar'
-        title='Обновить аватар'
-        text={isLoading ? `Сохранение` : `Сохранить`}
-        onSubmit={handleSubmit}
+      isOpen={isOpen}
+      onClose={onClose}
+      name='avatar'
+      title='Обновить аватар'
+      text={isLoading ? `Сохранение` : `Сохранить`}
+      onSubmit={handleSubmit}
     >
-        <input 
-            className="popup__input" 
-            type="url" 
-            id="input-avatar-link" 
-            name="avatar" 
-            placeholder="Ссылка на картинку" 
-            required
-            ref={avatarRef}
-        />
-        <span className="popup__error popup__input-error input-avatar-link-error"></span>
+      <input 
+        className="popup__input" 
+        type="url" 
+        id="input-avatar-link" 
+        name="avatar" 
+        placeholder="Ссылка на картинку" 
+        required
+        ref={avatarRef}
+      />
+      <span className="popup__error popup__input-error input-avatar-link-error"></span>
     </PopupWithForm>  
-    )
+  )
 }

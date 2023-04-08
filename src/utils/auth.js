@@ -1,43 +1,51 @@
-const BASE_URL = "https://auth.nomoreparties.co";
-const checkResponse = (res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return res.json()
-    .catch((err) => {
-        console.log(err);
-    })
+const BASE_URL = 'https://auth.nomoreparties.co';
+
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-export const register = ({password, email}) => {
-  console.log(password, email)
-  debugger
-  return fetch (`${BASE_URL}/signup`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({password, email})
-  })
-  .then(checkResponse)
+function request(endpoint, options) {
+  return fetch(`${BASE_URL}/${endpoint}`, options).then(checkResponse)
 }
-export const authorize = (password, email) => {
-  return fetch(`${BASE_URL}/signin`, {
+
+export const signup = ({ password, email }) => {
+  return request(`signup`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
+    body: JSON.stringify({ password, email })
   })
-  .then(checkResponse)
 };
-export const tokenCheck  = (jwt) => {
-  return fetch(`${BASE_URL}/users/me`, {
+
+export const signin = (email, password) => {
+  return request(`signin`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, password })
+  })
+  .then((data) => {
+    if (data.token) {
+      localStorage.setItem('token', data.token);
+    }
+  })
+};
+
+export const checkToken = (token) => {
+  return request(`users/me`, {
     method: 'GET',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${jwt}`
-    }})
-  .then(checkResponse)
-}
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+  .then(data => { return data })
+};

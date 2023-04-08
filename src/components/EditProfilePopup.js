@@ -36,36 +36,36 @@ function EditProfilePopup ({ isOpen, onClose, onUpdateUser, isLoading }) {
       text={isLoading ? `Сохранение` : `Сохранить`}
       onSubmit={handleSubmit}
     >
-        <label className="popup__label">
-            <input 
-                className="popup__input"
-                id="input-name"
-                type="text"
-                name="name"
-                placeholder="Имя"
-                minLength={2}
-                maxLength={40}
-                required
-                onChange={handleChangeName}
-                value={name}
-            />
-            <span className="popup__error popup__input-error input-name-error" id="input-name-error"></span>    
-        </label>
-        <label className="popup__label">
-            <input
-                className="popup__input"
-                id="input-about"
-                type="text"
-                name="about"
-                placeholder="О себе"
-                minLength={2}
-                maxLength={200}
-                required
-                onChange={handleChangeAbout}
-                value={about}
-            />
-            <span className="popup__error popup__input-error input-about-error" id="input-about-error"></span>
-        </label>
+      <label className="popup__label">
+        <input 
+          className="popup__input"
+          id="input-name"
+          type="text"
+          name="name"
+          placeholder="Имя"
+          minLength={2}
+          maxLength={40}
+          required
+          onChange={handleChangeName}
+          value={name}
+        />
+        <span className="popup__error popup__input-error input-name-error" id="input-name-error"></span>    
+      </label>
+      <label className="popup__label">
+        <input
+          className="popup__input"
+          id="input-about"
+          type="text"
+          name="about"
+          placeholder="О себе"
+          minLength={2}
+          maxLength={200}
+          required
+          onChange={handleChangeAbout}
+          value={about}
+        />
+        <span className="popup__error popup__input-error input-about-error" id="input-about-error"></span>
+      </label>
           
     </PopupWithForm>        
   )
